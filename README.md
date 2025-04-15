@@ -1,0 +1,1 @@
+# Synecta-test-assignment
