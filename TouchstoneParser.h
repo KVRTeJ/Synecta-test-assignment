@@ -5,18 +5,19 @@
 
 class TouchstoneParser : public IParser {
 public:
-    TouchstoneParser();
+    TouchstoneParser(const QString& fileName = "") : m_fileName(fileName)
+    {}
     ~TouchstoneParser() override = default;
 
-    QString getFileName() const override;
-    void setFileName(const QString& fileName) override;
+    QString getFileName() const override {return m_fileName;}
+    void setFileName(const QString& fileName) override {m_fileName = fileName;}
 
     bool parse() override;
 
-    QList<ParseData> getParsedData() const override;
+    QList<ParseData> getParsedData() const override {return m_data;}
 
 private:
-    QString m_fileName = 0;
+    QString m_fileName = "";
     QList<ParseData> m_data = {};
 };
 
