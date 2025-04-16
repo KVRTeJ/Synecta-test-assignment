@@ -11,6 +11,8 @@ bool TouchstoneParser::parse() {
         return false;
     }
 
+    m_data.clear();
+
     QTextStream in(&file);
     while (!in.atEnd()) {
         QString line = in.readLine();

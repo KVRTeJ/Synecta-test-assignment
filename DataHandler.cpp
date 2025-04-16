@@ -34,9 +34,6 @@ bool DataHandler::getProcessedData(QVector<double>& frequency, QVector<double>& 
     if(!m_parser->parse())
         return false;
 
-    if(!m_parser->parse())
-        return false;
-
     QList<IParser::ParseData> parsedData = m_parser->getParsedData();
     if(parsedData.empty())
         return true;

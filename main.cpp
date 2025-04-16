@@ -8,12 +8,12 @@
 
 int main(int argc, char *argv[]) {
     TouchstoneParser pars;
-    pars.setFileName("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
+    pars.setFileName("C:\\Users\\dmitriy.filimonov\\Downloads\\samples500k.S1P");
     pars.parse();
 
     ProcessingLogMag proc;
 
-    DataHandler hand;
+    DataHandler hand("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
     hand.setParser(&pars);
     hand.setProcessingUnit(&proc);
 
@@ -22,9 +22,10 @@ int main(int argc, char *argv[]) {
 
     assert(xAxis.size() == yAxis.size());
 
-    qDebug() << xAxis;
-    qDebug() << "================================================================================";
-    qDebug() << yAxis;
+    qDebug() << xAxis.size() << yAxis.size();
+//    qDebug() << xAxis;
+//    qDebug() << "================================================================================";
+//    qDebug() << yAxis;
 
     return -1;
 }
