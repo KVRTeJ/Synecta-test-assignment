@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[]) {
     ProcessingLogMag foo;
-    foo.processData(9e+09, 3);
+    foo.processData(-0.78411, -0.665123);
     return -2;
     TouchstoneParser boo;
 

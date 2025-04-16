@@ -7,7 +7,7 @@ class ProcessingLogMag : public IProcessingData {
 public:
     ~ProcessingLogMag() override = default;
 
-    double processData(const double real, const double imag);
+    double processData(const double real, const double imag) override;
 };
 
 #endif // PROCESSINGLOGMAG_H
