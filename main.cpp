@@ -1,31 +1,20 @@
-#include <iostream>
-#include <QDebug>
-#include <assert.h>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 
-#include "TouchstoneParser.h"
-#include "ProcessingLogMag.h"
-#include "DataHandler.h"
+    int main(int argc, char *argv[]) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+    QGuiApplication app(argc, argv);
 
-int main(int argc, char *argv[]) {
-    TouchstoneParser pars;
-    pars.setFileName("C:\\Users\\dmitriy.filimonov\\Downloads\\samples500k.S1P");
-    pars.parse();
+    QQmlApplicationEngine engine;
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+        &app, [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        }, Qt::QueuedConnection);
+    engine.load(url);
 
-    ProcessingLogMag proc;
-
-    DataHandler hand("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
-    hand.setParser(&pars);
-    hand.setProcessingUnit(&proc);
-
-    QVector<double> xAxis, yAxis;
-    hand.getProcessedData(xAxis, yAxis);
-
-    assert(xAxis.size() == yAxis.size());
-
-    qDebug() << xAxis.size() << yAxis.size();
-//    qDebug() << xAxis;
-//    qDebug() << "================================================================================";
-//    qDebug() << yAxis;
-
-    return -1;
+    return app.exec();
 }
