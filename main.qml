@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
+import QtCharts 2.15
 
 ApplicationWindow {
     visible: true
@@ -12,20 +13,35 @@ ApplicationWindow {
         width: parent.width - 10; height: parent.height - 10
         color: "#bdc3c7"
         anchors.centerIn: parent
+        radius: 5
+        Rectangle {
+            id: chartViewRect
+            width: (parent.width - 10); height: (parent.height - 20 - loadButton.height)
+            color: "#34495e"
+            y: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            radius: 5
+            ChartView {
+                id: mainGraph
+                anchors.fill: parent
+                theme: ChartView.ChartThemeBrownSand
+                antialiasing: true
+            }
+        }
+
         Button {
             id: loadButton
-            width: (parent.width - 20); height: (parent.height * 0.1)
+            width: (parent.width - 10); height: (parent.height * 0.1)
             y: parent.height - height - 10
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: fileDialog.open()
-
             Text {
                 id: loadButtonText
                 text: "Select file"
                 anchors.fill: parent
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.pointSize: 20
+                font.pointSize: 15
                 font.bold: true
             }
         }
