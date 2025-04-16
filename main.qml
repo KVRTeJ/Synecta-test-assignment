@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Dialogs 1.3
 import QtCharts 2.15
+import App 1.0
 
 ApplicationWindow {
     visible: true
@@ -26,6 +27,16 @@ ApplicationWindow {
                 anchors.fill: parent
                 theme: ChartView.ChartThemeBrownSand
                 antialiasing: true
+
+                ValueAxis {id: axisX; min: graphDataUiHandler.minX; max: graphDataUiHandler.maxX}
+                ValueAxis {id: axisY; min: graphDataUiHandler.minY; max: graphDataUiHandler.maxY}
+
+                LineSeries {
+                    id: lineSeries
+                    axisX: axisX
+                    axisY: axisY
+                    name: "Data Series"
+                }
             }
         }
 
@@ -52,6 +63,18 @@ ApplicationWindow {
             folder: shortcuts.home
             onAccepted: {
                 urlCatcher.getFileUrl(fileDialog.fileUrls[0])
+            }
+        }
+
+        GraphDataUiHandler {
+            id: graphDataUiHandler
+            objectName: "graphDataUiHandler"
+            onPointsChanged: {
+                lineSeries.clear();
+                var points = graphDataUiHandler.points;
+                for (var i = 0; i < points.length; i++) {
+                    lineSeries.append(points[i].x, points[i].y);
+                }
             }
         }
     }

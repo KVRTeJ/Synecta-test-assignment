@@ -5,7 +5,11 @@
 
 #include <QUrl>
 
+#include "DataHandler.h"
+#include "TouchstoneParser.h"
+#include "ProcessingLogMag.h"
 #include "FileUrlCatcher.h"
+#include "GraphDataUiHandler.h"
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -14,7 +18,6 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationDomain("kvrtej");
 #endif
     QApplication app(argc, argv);
-
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -25,9 +28,29 @@ int main(int argc, char *argv[]) {
         }, Qt::QueuedConnection);
 
 
+    qmlRegisterType<GraphDataUiHandler>("App", 1, 0, "GraphDataUiHandler");
+
     FileUrlCatcher boo;
     engine.rootContext()->setContextProperty("urlCatcher", &boo);
     engine.load(url);
+
+    TouchstoneParser pars;
+    ProcessingLogMag proc;
+    DataHandler hand;
+    hand.setParser(&pars);
+    hand.setProcessingUnit(&proc);
+
+    hand.setFilePath("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
+
+    QVector<double> xData;
+    QVector<double> yData;
+    hand.getProcessedData(xData, yData);
+
+    QObject *root = engine.rootObjects().first();
+    GraphDataUiHandler *dataHandler = root->findChild<GraphDataUiHandler*>("graphDataUiHandler");
+    if (dataHandler) {
+        dataHandler->setData(xData, yData);
+    }
 
     return app.exec();
 }
