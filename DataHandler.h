@@ -8,20 +8,22 @@
 
 class DataHandler {
 public:
-    DataHandler(IParser* parser = nullptr, IProcessingData* processingUnit = nullptr);
+    DataHandler(const QString& fileName = "", IParser* parser = nullptr, IProcessingData* processingUnit = nullptr);
 
+    QString getFileName() const {return m_fileName;}
     IProcessingData* getProcessingUnit() const {return m_processingUnit;}
     IParser* getParser() const {return m_parser;}
 
+    void setFileName(const QString& fileName);
     void setProcessingUnit(IProcessingData* processingUnit) {m_processingUnit = processingUnit;}
-    void setParser(IParser* parser) {m_parser = parser;}
+    void setParser(IParser* parser);
 
     bool getProcessedData(QVector<double>& frequency, QVector<double>& logMax);
 
 private:
+    QString m_fileName = "";
     IProcessingData* m_processingUnit = nullptr;
     IParser* m_parser = nullptr;
-
 };
 
 #endif // DATAHANDLER_H

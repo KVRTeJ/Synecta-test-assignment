@@ -1,23 +1,30 @@
 #include <iostream>
 #include <QDebug>
+#include <assert.h>
 
 #include "TouchstoneParser.h"
 #include "ProcessingLogMag.h"
+#include "DataHandler.h"
 
 int main(int argc, char *argv[]) {
-    ProcessingLogMag foo;
-    foo.processData(-0.78411, -0.665123);
-    return -2;
-    TouchstoneParser boo;
+    TouchstoneParser pars;
+    pars.setFileName("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
+    pars.parse();
 
-    boo.setFileName("C:\\Users\\dmitriy.filimonov\\Downloads\\S11.S1P");
-    boo.parse();
+    ProcessingLogMag proc;
 
-    auto parsed = boo.getParsedData();
-    qDebug() << parsed.size();
-    for(auto it = parsed.begin(); it != parsed.end(); ++it) {
-        qDebug() << (*it).frequency << (*it).real << (*it).imag;
-    }
+    DataHandler hand;
+    hand.setParser(&pars);
+    hand.setProcessingUnit(&proc);
+
+    QVector<double> xAxis, yAxis;
+    hand.getProcessedData(xAxis, yAxis);
+
+    assert(xAxis.size() == yAxis.size());
+
+    qDebug() << xAxis;
+    qDebug() << "================================================================================";
+    qDebug() << yAxis;
 
     return -1;
 }
