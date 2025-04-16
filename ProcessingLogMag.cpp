@@ -10,7 +10,5 @@ double ProcessingLogMag::processData(const double real, const double imag) {
 
     result = 20 * log10(result);
 
-    qDebug() << result;
-
     return result;
 }

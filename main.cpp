@@ -2,7 +2,7 @@
 #include <QDebug>
 
 #include "TouchstoneParser.h"
-#include "ProcessingLogMag.h""
+#include "ProcessingLogMag.h"
 
 int main(int argc, char *argv[]) {
     ProcessingLogMag foo;

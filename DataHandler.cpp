@@ -1,6 +1,9 @@
 #include "DataHandler.h"
 
-DataHandler::DataHandler()
-{
+bool DataHandler::getProcessedData(QVector<double>& frequency, QVector<double>& logMax) {
+    if(!m_parser || !m_processingUnit) {
+        return false;
+    }
+
 
 }
