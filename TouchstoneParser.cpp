@@ -4,10 +4,10 @@
 #include "TouchstoneParser.h"
 
 bool TouchstoneParser::parse() {
-    QFile file(m_fileName);
+    QFile file(m_filePath);
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "cant open file" << m_fileName; //TODO: to emit
+        qDebug() << "cant open file" << m_filePath; //TODO: to emit
         return false;
     }
 

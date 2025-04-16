@@ -15,8 +15,8 @@ public:
 public:
     virtual ~IParser() = default;
 
-    virtual QString getFileName() const = 0;
-    virtual void setFileName(const QString& fileName) = 0;
+    virtual QString getFilePath() const = 0;
+    virtual void setFilePath(const QString& filePath) = 0;
 
     virtual bool parse() = 0;
 

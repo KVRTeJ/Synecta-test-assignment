@@ -2,16 +2,16 @@
 
 #include "DataHandler.h"
 
-DataHandler::DataHandler(const QString& fileName, IParser* parser, IProcessingData* processingUnit)
-    : m_fileName(fileName), m_processingUnit(processingUnit)
+DataHandler::DataHandler(const QString& filePath, IParser* parser, IProcessingData* processingUnit)
+    : m_filePath(filePath), m_processingUnit(processingUnit)
 {
     setParser(parser);
 }
 
-void DataHandler::setFileName(const QString& fileName) {
-    m_fileName = fileName;
+void DataHandler::setFilePath(const QString& filePath) {
+    m_filePath = filePath;
     if(m_parser)
-        m_parser->setFileName(fileName);
+        m_parser->setFilePath(filePath);
 }
 
 void DataHandler::setParser(IParser* parser) {
@@ -19,10 +19,10 @@ void DataHandler::setParser(IParser* parser) {
         return;
 
     m_parser = parser;
-    if(m_parser->getFileName().isEmpty() || !m_fileName.isEmpty())
-        m_parser->setFileName(m_fileName);
-    else if(m_fileName.isEmpty())
-        m_fileName = m_parser->getFileName();
+    if(m_parser->getFilePath().isEmpty() || !m_filePath.isEmpty())
+        m_parser->setFilePath(m_filePath);
+    else if(m_filePath.isEmpty())
+        m_filePath = m_parser->getFilePath();
 }
 
 bool DataHandler::getProcessedData(QVector<double>& frequency, QVector<double>& logMax) {
