@@ -30,16 +30,12 @@ ApplicationWindow {
             }
         }
 
-        Rectangle {
-
-        }
-
         FileDialog {
             id: fileDialog
             title: "Select File"
             folder: shortcuts.home
             onAccepted: {
-                dataModel.loadFile(fileDialog.fileUrls[0])
+                urlCatcher.getFileUrl(fileDialog.fileUrls[0])
             }
         }
     }
