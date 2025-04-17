@@ -6,6 +6,7 @@ QT += core gui qml quick charts widgets
 
 SOURCES += \
         DataHandler.cpp \
+        DataUiManager.cpp \
         GraphDataUiHandler.cpp \
         ProcessingLogMag.cpp \
         TouchstoneParser.cpp \
@@ -26,6 +27,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     DataHandler.h \
+    DataUiManager.h \
     FileUrlCatcher.h \
     GraphDataUiHandler.h \
     IDataUiHandler.h \

@@ -11,6 +11,7 @@
 #include "TouchstoneParser.h"
 #include "ProcessingLogMag.h"
 #include "FileUrlCatcher.h"
+#include "DataUiManager.h"
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -46,17 +47,14 @@ int main(int argc, char *argv[]) {
     QVector<double> yData;
     hand.getProcessedData(xData, yData);
 
-    QObject *root = engine.rootObjects().first();
-    if (!root) {
-        qDebug() << "root nlptr";
-        return -1;
-    }
-
-    GraphDataUiHandler *dataHandler = root->findChild<GraphDataUiHandler*>("graphDataUiHandler");
+    QObject* root = engine.rootObjects().first();
+    GraphDataUiHandler* dataHandler = root->findChild<GraphDataUiHandler*>("graphDataUiHandler");
     if (dataHandler) {
-        dataHandler->setData(xData, yData);
+        DataUiManager manager(hand, dataHandler);
+        QObject::connect(&boo, &FileUrlCatcher::sendFilePath, &manager, &DataUiManager::filePathChanged);
+
     } else {
-        qDebug() << "GraphDataUiHandler = nlptr";
+        std::runtime_error("cant find GraphDataUiHandler");
     }
 
     return app.exec();
