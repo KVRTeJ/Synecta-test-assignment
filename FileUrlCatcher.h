@@ -14,6 +14,7 @@ public slots:
     void getFileUrl(const QUrl& fileUrl) {
         QString filePath = fileUrl.toLocalFile();
         emit sendFilePath(filePath);
+        qDebug() << "FileUrlCatcher:" << filePath;
     }
 
 signals:

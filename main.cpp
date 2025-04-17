@@ -47,12 +47,14 @@ int main(int argc, char *argv[]) {
     QVector<double> yData;
     hand.getProcessedData(xData, yData);
 
+    DataUiManager manager(hand);
     QObject* root = engine.rootObjects().first();
     GraphDataUiHandler* dataHandler = root->findChild<GraphDataUiHandler*>("graphDataUiHandler");
     if (dataHandler) {
-        DataUiManager manager(hand, dataHandler);
-        QObject::connect(&boo, &FileUrlCatcher::sendFilePath, &manager, &DataUiManager::filePathChanged);
-
+        manager.setDataUiHandler(dataHandler);
+        QObject::connect(&boo, &FileUrlCatcher::sendFilePath,
+                         &manager, &DataUiManager::filePathChanged);
+        boo.getFileUrl(QUrl());
     } else {
         std::runtime_error("cant find GraphDataUiHandler");
     }

@@ -1,10 +1,14 @@
+#include <QDebug>
+
 #include "DataUiManager.h"
 
 void DataUiManager::filePathChanged(const QString filePath) {
+    qDebug() << "filePathChanged starded";
     if(filePath.isEmpty()) {
         m_dataUiHandler->setData({}, {});
     }
 
+    qDebug() << filePath;
     QVector<double> xAxis, yAxis;
 
     m_dataHandler.setFilePath(filePath);

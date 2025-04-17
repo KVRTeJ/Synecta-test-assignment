@@ -15,6 +15,7 @@ public:
     void setDataUiHandler(IDataUiHandler* handler) {m_dataUiHandler = handler;}
 
     const DataHandler& getDataHandler() const {return m_dataHandler;}
+
 public slots:
     void filePathChanged(const QString filePath);
 
