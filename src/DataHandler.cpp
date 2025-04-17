@@ -1,4 +1,4 @@
-#include "DataHandler.h"
+#include "../include/DataHandler.h"
 
 DataHandler::DataHandler(const QString& filePath, IParser* parser, IProcessingData* processingUnit)
     : m_filePath(filePath), m_processingUnit(processingUnit)

@@ -2,7 +2,7 @@
 #include <QFileInfo>
 #include <QTextStream>
 
-#include "TouchstoneParser.h"
+#include "../include/TouchstoneParser.h"
 
 bool TouchstoneParser::parse() {
     QFile file(m_filePath);

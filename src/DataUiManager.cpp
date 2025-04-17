@@ -1,4 +1,4 @@
-#include "DataUiManager.h"
+#include "../include/DataUiManager.h"
 
 void DataUiManager::setDataUiHandler(IDataUiHandler* handler) {
     m_dataUiHandler = handler;

@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "ProcessingLogMag.h"
+#include "../include/ProcessingLogMag.h"
 
 double ProcessingLogMag::processData(const double real, const double imag) {
     double result = pow(real, 2) + pow(imag, 2);

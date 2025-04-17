@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include "GraphDataUiHandler.h"
+#include "../include/GraphDataUiHandler.h"
 
 void GraphDataUiHandler::setSeries(QtCharts::QLineSeries* series) {
     m_series = series;
