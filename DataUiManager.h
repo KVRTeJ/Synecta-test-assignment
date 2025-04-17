@@ -10,15 +10,10 @@ public:
     DataUiManager(DataHandler dataHandler = {}, IDataUiHandler* dataUiHandler = nullptr)
         : m_dataHandler(dataHandler), m_dataUiHandler(dataUiHandler)
     {}
+    ~DataUiManager() override = default;
 
     void setDataHandler(const DataHandler handler) {m_dataHandler = handler;}
-    void setDataUiHandler(IDataUiHandler* handler) {
-        m_dataUiHandler = handler;
-        if (m_dataUiHandler) {
-            connect(m_dataHandler.getParser(), &IParser::fileOpenError, this, &DataUiManager::handleFileOpenError);
-            connect(m_dataHandler.getParser(), &IParser::fileFormatError, this, &DataUiManager::handleFileFormatError);
-        }
-    }
+    void setDataUiHandler(IDataUiHandler* handler);
 
     const DataHandler& getDataHandler() const {return m_dataHandler;}
 

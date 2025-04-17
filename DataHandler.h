@@ -9,6 +9,7 @@
 class DataHandler {
 public:
     DataHandler(const QString& filePath = "", IParser* parser = nullptr, IProcessingData* processingUnit = nullptr);
+    ~DataHandler() = default;
 
     QString getFilePath() const {return m_filePath;}
     IProcessingData* getProcessingUnit() const {return m_processingUnit;}

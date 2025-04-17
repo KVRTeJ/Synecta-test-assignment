@@ -57,7 +57,7 @@ ApplicationWindow {
                     objectName: "lineSeries"
                     axisX: axisX
                     axisY: axisY
-                    name: "Data"
+                    name: "Parsed Data"
                 }
 
                 Component.onCompleted: {

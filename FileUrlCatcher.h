@@ -2,19 +2,18 @@
 #define FILEURLCATCHER_H
 
 #include <QObject>
-#include <QDebug>
 #include <QUrl>
 
 class FileUrlCatcher : public QObject {
     Q_OBJECT
 public:
     FileUrlCatcher() = default;
+    ~FileUrlCatcher() override = default;
 
 public slots:
     void getFileUrl(const QUrl& fileUrl) {
         QString filePath = fileUrl.toLocalFile();
         emit sendFilePath(filePath);
-        qDebug() << "FileUrlCatcher:" << filePath;
     }
 
 signals:

@@ -1,5 +1,3 @@
-#include <QDebug>
-
 #include "DataHandler.h"
 
 DataHandler::DataHandler(const QString& filePath, IParser* parser, IProcessingData* processingUnit)
@@ -27,7 +25,6 @@ void DataHandler::setParser(IParser* parser) {
 
 bool DataHandler::getProcessedData(QVector<double>& frequency, QVector<double>& logMax) {
     if(!m_parser || !m_processingUnit) {
-        //TODO: emit
         return false;
     }
 

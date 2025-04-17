@@ -1,14 +1,18 @@
-#include <QDebug>
-
 #include "DataUiManager.h"
 
+void DataUiManager::setDataUiHandler(IDataUiHandler* handler) {
+    m_dataUiHandler = handler;
+    if (m_dataUiHandler) {
+        connect(m_dataHandler.getParser(), &IParser::fileOpenError, this, &DataUiManager::handleFileOpenError);
+        connect(m_dataHandler.getParser(), &IParser::fileFormatError, this, &DataUiManager::handleFileFormatError);
+    }
+}
+
 void DataUiManager::filePathChanged(const QString filePath) {
-    qDebug() << "filePathChanged starded";
     if(filePath.isEmpty()) {
         m_dataUiHandler->setData({}, {});
     }
 
-    qDebug() << filePath;
     QVector<double> xAxis, yAxis;
 
     m_dataHandler.setFilePath(filePath);

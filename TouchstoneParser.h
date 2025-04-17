@@ -19,6 +19,9 @@ public:
     QList<ParseData> getParsedData() const override {return m_data;}
 
 private:
+    bool _isS1PFile(const QString& filePath);
+
+private:
     QString m_filePath = "";
     QList<ParseData> m_data = {};
 };
