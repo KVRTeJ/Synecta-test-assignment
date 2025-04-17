@@ -28,6 +28,7 @@ HEADERS += \
     DataHandler.h \
     FileUrlCatcher.h \
     GraphDataUiHandler.h \
+    IDataUiHandler.h \
     IParser.h \
     IProcessingData.h \
     ProcessingLogMag.h \

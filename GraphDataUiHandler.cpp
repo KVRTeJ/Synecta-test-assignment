@@ -1,7 +1,5 @@
 #include <algorithm>
 
-#include <QDebug>
-
 #include "GraphDataUiHandler.h"
 
 void GraphDataUiHandler::setSeries(QtCharts::QLineSeries* series) {
@@ -48,6 +46,7 @@ void GraphDataUiHandler::_calculateBounds(const QVector<double>& xAxis, const QV
         m_minX = m_maxX = 0;
     else {
         auto [minX, maxX] = std::minmax_element(xAxis.begin(), xAxis.end());
+
         m_minX = *minX;
         m_maxX = *maxX;
     }
@@ -56,6 +55,7 @@ void GraphDataUiHandler::_calculateBounds(const QVector<double>& xAxis, const QV
         m_minY = m_maxY = 0;
     else {
         auto [minY, maxY] = std::minmax_element(yAxis.begin(), yAxis.end());
+
         m_minY = *minY;
         m_maxY = *maxY;
     }

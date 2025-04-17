@@ -1,15 +1,9 @@
 #ifndef GRAPHDATAUIHANDLER_H
 #define GRAPHDATAUIHANDLER_H
 
-#include <QObject>
+#include "IDataUiHandler.h"
 
-#include <QVector>
-#include <QPointF>
-
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QValueAxis>
-
-class GraphDataUiHandler : public QObject {
+class GraphDataUiHandler : public IDataUiHandler {
     Q_OBJECT
 
     Q_PROPERTY(double minX READ getMinX NOTIFY minXChanged)
@@ -18,12 +12,12 @@ class GraphDataUiHandler : public QObject {
     Q_PROPERTY(double maxY READ getMaxY NOTIFY maxYChanged)
 
 public:
-    explicit GraphDataUiHandler(QObject *parent = nullptr) : QObject(parent), m_series(nullptr)
-    {}
+    GraphDataUiHandler() = default;
+    ~GraphDataUiHandler() override = default;
 
-    Q_INVOKABLE void updateSeries(QtCharts::QLineSeries* series, const QVector<double>& xAxis, const QVector<double>& yAxis);
-    Q_INVOKABLE void setData(const QVector<double>& xAxis, const QVector<double>& yAxis);
-    Q_INVOKABLE void setSeries(QtCharts::QLineSeries* series);
+    Q_INVOKABLE void updateSeries(QtCharts::QLineSeries* series, const QVector<double>& xAxis, const QVector<double>& yAxis) override;
+    Q_INVOKABLE void setData(const QVector<double>& xAxis, const QVector<double>& yAxis) override;
+    Q_INVOKABLE void setSeries(QtCharts::QLineSeries* series) override;
 
     double getMinX() const { return m_minX; }
     double getMaxX() const { return m_maxX; }
@@ -40,12 +34,12 @@ private:
     void _calculateBounds(const QVector<double>& xAxis, const QVector<double>& yAxis);
 
 private:
-    QtCharts::QLineSeries* m_series;
+    QtCharts::QLineSeries* m_series = nullptr;
 
-    double m_minX;
-    double m_maxX;
-    double m_minY;
-    double m_maxY;
+    double m_minX = 0;
+    double m_maxX = 0;
+    double m_minY = 0;
+    double m_maxY = 0;
 };
 
 #endif // GRAPHDATAUIHANDLER_H
