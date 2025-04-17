@@ -52,12 +52,14 @@ int main(int argc, char *argv[]) {
     GraphDataUiHandler* dataHandler = root->findChild<GraphDataUiHandler*>("graphDataUiHandler");
     if (dataHandler) {
         manager.setDataUiHandler(dataHandler);
-        QObject::connect(&boo, &FileUrlCatcher::sendFilePath,
-                         &manager, &DataUiManager::filePathChanged);
-        boo.getFileUrl(QUrl());
+        QObject::connect(&boo, &FileUrlCatcher::sendFilePath, &manager, &DataUiManager::filePathChanged);
     } else {
         std::runtime_error("cant find GraphDataUiHandler");
     }
+
+    QObject::connect(&manager, &DataUiManager::sendErrorToQml, root, [root](const QString& errorMessage) {
+        QMetaObject::invokeMethod(root, "displayError", Q_ARG(QVariant, errorMessage));
+    });
 
     return app.exec();
 }

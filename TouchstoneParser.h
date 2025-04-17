@@ -1,6 +1,8 @@
 #ifndef TOUCHSTONEPARSER_H
 #define TOUCHSTONEPARSER_H
 
+#include <QObject>
+
 #include "IParser.h"
 
 class TouchstoneParser : public IParser {

@@ -9,6 +9,19 @@ ApplicationWindow {
     width: 800; height: 600
     title: "Touchstone Parser"
 
+    MessageDialog {
+        id: errorDialog
+        title: "Ошибка"
+        icon: StandardIcon.Critical
+        text: ""
+        standardButtons: StandardButton.Ok
+    }
+
+    function displayError(errorMessage) {
+        errorDialog.text = errorMessage;
+        errorDialog.open();
+    }
+
     Rectangle {
         id: mainRect
         width: parent.width - 10; height: parent.height - 10

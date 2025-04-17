@@ -8,7 +8,7 @@ bool TouchstoneParser::parse() {
     QFile file(m_filePath);
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "cant open file" << m_filePath; //TODO: to emit
+        emit fileOpenError("can't open the file: " + m_filePath);
         return false;
     }
 
@@ -23,7 +23,7 @@ bool TouchstoneParser::parse() {
 
         QStringList parts = line.split(' ', Qt::SkipEmptyParts);
         if (parts.size() != 3) {
-            qDebug() << "uncorrect format file: has" << parts.size() << "in line:" << line; //TODO: to emit
+            emit fileFormatError("incorrect file format: in the line: " + line);
             return false;
         }
 
@@ -33,7 +33,7 @@ bool TouchstoneParser::parse() {
         double imag = parts[2].toDouble(&convertImag);
 
         if(!convertFrequency || !convertReal || !convertImag) {
-            qDebug() << "uncorrect format file: cant convert to double" << "in line:" << line; //TODO: to emit
+            emit fileFormatError("Incorrect file format: could not be converted to a number in a string: " + line);
             return false;
         }
 

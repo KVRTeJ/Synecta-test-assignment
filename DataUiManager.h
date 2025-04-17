@@ -12,12 +12,23 @@ public:
     {}
 
     void setDataHandler(const DataHandler handler) {m_dataHandler = handler;}
-    void setDataUiHandler(IDataUiHandler* handler) {m_dataUiHandler = handler;}
+    void setDataUiHandler(IDataUiHandler* handler) {
+        m_dataUiHandler = handler;
+        if (m_dataUiHandler) {
+            connect(m_dataHandler.getParser(), &IParser::fileOpenError, this, &DataUiManager::handleFileOpenError);
+            connect(m_dataHandler.getParser(), &IParser::fileFormatError, this, &DataUiManager::handleFileFormatError);
+        }
+    }
 
     const DataHandler& getDataHandler() const {return m_dataHandler;}
 
 public slots:
     void filePathChanged(const QString filePath);
+    void handleFileOpenError(const QString& errorMessage);
+    void handleFileFormatError(const QString& errorMessage);
+
+signals:
+    void sendErrorToQml(const QString& errorMessage);
 
 private:
     DataHandler m_dataHandler;

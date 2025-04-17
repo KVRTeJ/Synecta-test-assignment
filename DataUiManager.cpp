@@ -17,3 +17,11 @@ void DataUiManager::filePathChanged(const QString filePath) {
     if(m_dataUiHandler)
         m_dataUiHandler->setData(xAxis, yAxis);
 }
+
+void DataUiManager::handleFileOpenError(const QString& errorMessage) {
+    emit sendErrorToQml(errorMessage);
+}
+
+void DataUiManager::handleFileFormatError(const QString& errorMessage) {
+    emit sendErrorToQml(errorMessage);
+}
