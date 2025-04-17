@@ -5,12 +5,12 @@ QT += core gui qml quick charts widgets
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        DataHandler.cpp \
-        DataUiManager.cpp \
-        GraphDataUiHandler.cpp \
-        ProcessingLogMag.cpp \
-        TouchstoneParser.cpp \
-        main.cpp
+        src/DataHandler.cpp \
+        src/DataUiManager.cpp \
+        src/GraphDataUiHandler.cpp \
+        src/ProcessingLogMag.cpp \
+        src/TouchstoneParser.cpp \
+        src/main.cpp
 
 RESOURCES += qml.qrc
 
@@ -26,12 +26,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    DataHandler.h \
-    DataUiManager.h \
-    FileUrlCatcher.h \
-    GraphDataUiHandler.h \
-    IDataUiHandler.h \
-    IParser.h \
-    IProcessingData.h \
-    ProcessingLogMag.h \
-    TouchstoneParser.h
+    include/DataHandler.h \
+    include/DataUiManager.h \
+    include/FileUrlCatcher.h \
+    include/GraphDataUiHandler.h \
+    include/IDataUiHandler.h \
+    include/IParser.h \
+    include/IProcessingData.h \
+    include/ProcessingLogMag.h \
+    include/TouchstoneParser.h
