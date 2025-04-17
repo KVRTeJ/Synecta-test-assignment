@@ -12,7 +12,7 @@ public:
     {}
     ~DataUiManager() override = default;
 
-    void setDataHandler(const DataHandler handler) {m_dataHandler = handler;}
+    void setDataHandler(const DataHandler& handler) {m_dataHandler = handler;}
     void setDataUiHandler(IDataUiHandler* handler);
 
     const DataHandler& getDataHandler() const {return m_dataHandler;}

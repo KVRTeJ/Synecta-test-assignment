@@ -19,10 +19,10 @@ public:
     Q_INVOKABLE void setData(const QVector<double>& xAxis, const QVector<double>& yAxis) override;
     Q_INVOKABLE void setSeries(QtCharts::QLineSeries* series) override;
 
-    double getMinX() const { return m_minX; }
-    double getMaxX() const { return m_maxX; }
-    double getMinY() const { return m_minY; }
-    double getMaxY() const { return m_maxY; }
+    double getMinX() const {return m_minX;}
+    double getMaxX() const {return m_maxX;}
+    double getMinY() const {return m_minY;}
+    double getMaxY() const {return m_maxY;}
 
 signals:
     void minXChanged();
